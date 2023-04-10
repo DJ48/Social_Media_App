@@ -3,14 +3,13 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-    userId: {
+    taskId: {
         type: Number,
         unique: true,
         required: true,
     },
-    taskId: {
+    userId: {
         type: Number,
-        unique: true,
         required: true,
     },
     title: {
@@ -22,21 +21,12 @@ const taskSchema = new Schema({
         type: Boolean,
         required: true,
         default: false,
-    },
-    createdAt: {
-        type: Date,
-        immutable: true,
-        default: () => {
-            return Date.now();
-        }
-    },
-    updatedAt: {
-        type: Date,
-        default: () => {
-            return Date.now();
-        }
     }
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 const Task = mongoose.model("Task", taskSchema);
 

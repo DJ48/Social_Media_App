@@ -5,7 +5,7 @@
 import express from "express";
 import { signup, login, logout, generateAccessToken } from "../controllers/AccountSessionController.js";
 import { verifyToken, verifyRefreshToken } from "../middlewares/auth.middleware.js";
-import { createTask, updateTask } from "../controllers/TodoController.js";
+import { createTask, updateTask, deleteTask, fetchTaskList } from "../controllers/TodoController.js";
 
 const router = express.Router();
 
@@ -18,5 +18,7 @@ router.post("/refresh", verifyRefreshToken, generateAccessToken);
 //Todo Controller Routes
 router.post("/create/todo", verifyToken, createTask);
 router.put("/update/todo", verifyToken, updateTask);
+router.delete("/delete/todo", verifyToken, deleteTask);
+router.get("/todo/list", verifyToken, fetchTaskList);
 
 export default router;

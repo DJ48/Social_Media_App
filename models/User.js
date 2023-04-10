@@ -32,25 +32,16 @@ const userSchema = new Schema({
         type: String,
         default: "member"
     },
-    createdAt: {
-        type: Date,
-        immutable: true,
-        default: () => {
-            return Date.now();
-        }
-    },
-    updatedAt: {
-        type: Date,
-        default: () => {
-            return Date.now();
-        }
-    },
     deletedAt: {
         type: Date,
         immutable: true,
         default: null
     },
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 const User = mongoose.model("User", userSchema);
 

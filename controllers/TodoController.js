@@ -45,7 +45,7 @@ const createTask = async (req, res) => {
         
     }
     catch(err){
-        console.error("Error while creating new user: ", err.message);
+        console.error("Error while creating new todo: ", err.message);
         res.status(500).send({
             message : responseMessage.ERR_MSG_ISSUE_IN_CREATE_TODO_API
         });
@@ -62,14 +62,14 @@ const updateTask = async (req, res) => {
             userId: req.body.userId,
             taskId: req.body.taskId,
             title: req.body.title,
-            completed: req.body.Completed,
+            completed: req.body.completed,
         }   
 
         const schema = Joi.object({
             userId: Joi.number(),
             taskId: Joi.number().required(),
             title: Joi.string().min(3).max(30).required(),
-            completed: Joi.boolean(),
+            completed: Joi.boolean().required(),
         })
 
         const validateRequest = schema.validate(request);
@@ -88,7 +88,9 @@ const updateTask = async (req, res) => {
         } 
 
         const data = await Task.findOneAndUpdate({ taskId: request.taskId },
-                                    { title: request.title, completed: request.completed });
+            { title: request.title, completed: request.completed },
+            { new: true }
+        );
 
         return res.status(200).send({
             message: responseMessage.TODO_UPDATED,
@@ -97,11 +99,86 @@ const updateTask = async (req, res) => {
         
     }
     catch(err){
-        console.error("Error while logging in user: ", err.message);
+        console.error("Error while updating todo: ", err.message);
         res.status(500).send({
             message : responseMessage.ERR_MSG_ISSUE_IN_UPDATE_TODO_API
         });
     }
 }
 
-export { createTask, updateTask };
+/**
+ * Controller for deleting Todo
+ */
+
+const deleteTask = async (req, res) => {
+    try {
+        const request = {
+            userId: req.body.userId,
+            taskId: req.query.id,
+        }   
+
+        const schema = Joi.object({
+            userId: Joi.number(),
+            taskId: Joi.number().required(),
+        })
+
+        const validateRequest = schema.validate(request);
+        if (validateRequest.error) {
+            return res.status(400).send({
+                message: validateRequest.error.message
+            })
+        }
+
+        //Check if todo exists
+        const todoExists = await Task.findOne({ userId: request.userId, taskId: request.taskId });
+        if (_.isEmpty(todoExists)) {
+            return res.status(400).send({
+                message: responseMessage.TODO_NOT_FOUND
+            })
+        } 
+
+        const data = await Task.findOneAndDelete({ taskId: request.taskId });
+
+        return res.status(200).send({
+            message: responseMessage.TODO_DELETED,
+        })
+        
+    }
+    catch(err){
+        console.error("Error while deleting todo: ", err.message);
+        res.status(500).send({
+            message : responseMessage.ERR_MSG_ISSUE_IN_DELETE_TODO_API
+        });
+    }
+}
+
+
+/**
+ * Controller for Todo List
+ */
+
+const fetchTaskList = async (req, res) => {
+    try {
+        
+        const userId = req.body.userId;
+
+        //Check if todo exists
+        const todoList = await Task.find({ userId: userId }, {'_id': false, '__v': false}); 
+
+        return res.status(200).send({
+            message: responseMessage.TODO_LIST,
+            data: todoList
+        })
+        
+    }
+    catch(err){
+        console.error("Error while fetching todo list: ", err.message);
+        res.status(500).send({
+            message : responseMessage.ERR_MSG_ISSUE_IN_TODO_LIST_API
+        });
+    }
+}
+
+
+
+export { createTask, updateTask, deleteTask, fetchTaskList };
