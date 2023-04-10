@@ -6,6 +6,8 @@ const responseMessage = {
     ERR_MSG_ISSUE_IN_UPDATE_TODO_API: "Oops! Something went wrong in Update Todo API",
     ERR_MSG_ISSUE_IN_DELETE_TODO_API: "Oops! Something went wrong in Delete Todo API",
     ERR_MSG_ISSUE_IN_TODO_LIST_API: "Oops! Something went wrong in Todo List API",
+    ERR_MSG_ISSUE_IN_CREATE_POST_API: "Oops! Something went wrong in Create Post API",
+    ERR_MSG_ISSUE_IN_POST_LIST_API: "Oops! Something went wrong in Post List API",
     
 
 
@@ -31,6 +33,13 @@ const responseMessage = {
     TODO_LIST: "Todo List fetched Successfully !!!",
     TODO_DELETED: "Todo Deleted Successfullt !!!",
     TODO_NOT_FOUND: "Todo not found",
+
+    //Post Controller
+    POST_CREATED: "Post Created Successfully !!!",
+    POST_UPDATED: "Post Updated Successfully !!!",
+    POST_LIST: "Post List fetched Successfully !!!",
+    POST_DELETED: "Post Deleted Successfullt !!!",
+    POST_NOT_FOUND: "Post not found",
     
 }
 
