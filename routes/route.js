@@ -7,6 +7,7 @@ import { signup, login, logout, generateAccessToken } from "../controllers/Accou
 import { verifyToken, verifyRefreshToken } from "../middlewares/auth.middleware.js";
 import { createTask, updateTask, deleteTask, fetchTaskList } from "../controllers/TodoController.js";
 import { createPost, fetchPostList } from "../controllers/PostController.js";
+import { createComment, fetchCommentList } from "../controllers/CommentController.js";
 
 const router = express.Router();
 
@@ -25,5 +26,9 @@ router.get("/todo/list", verifyToken, fetchTaskList);
 //Post Controller Routes
 router.post("/create/post", verifyToken, createPost);
 router.get("/post/list", verifyToken, fetchPostList);
+
+//Comment Controller Routes
+router.post("/create/comment", verifyToken, createComment);
+router.get("/comment/list", verifyToken, fetchCommentList);
 
 export default router;

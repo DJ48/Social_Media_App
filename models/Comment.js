@@ -2,21 +2,25 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
-    postId: {
+const commentSchema = new Schema({
+    commentId: {
         type: Number,
         unique: true,
         required: true,
     },
-    userId: {
+    postId: {
         type: Number,
         required: true,
     },
-    title: {
+    text: {
         type: String,
         required: true
     },
-    description: {
+    commentedUserId: {
+        type: Number,
+        required: true
+    },
+    commentedUserName: {
         type: String,
         required: true
     },
@@ -31,6 +35,6 @@ const postSchema = new Schema({
     }
 );
 
-const Post = mongoose.model("Post", postSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-export default Post;
+export default Comment;

@@ -8,6 +8,8 @@ const responseMessage = {
     ERR_MSG_ISSUE_IN_TODO_LIST_API: "Oops! Something went wrong in Todo List API",
     ERR_MSG_ISSUE_IN_CREATE_POST_API: "Oops! Something went wrong in Create Post API",
     ERR_MSG_ISSUE_IN_POST_LIST_API: "Oops! Something went wrong in Post List API",
+    ERR_MSG_ISSUE_IN_CREATE_COMMENT_API: "Oops! Something went wrong in Create Comment API",
+    ERR_MSG_ISSUE_IN_COMMENT_LIST_API: "Oops! Something went wrong in Comment List API",
     
 
 
@@ -40,6 +42,13 @@ const responseMessage = {
     POST_LIST: "Post List fetched Successfully !!!",
     POST_DELETED: "Post Deleted Successfullt !!!",
     POST_NOT_FOUND: "Post not found",
+
+    //Comment Controller
+    COMMENT_CREATED: "Comment Created Successfully !!!",
+    COMMENT_UPDATED: "Comment Updated Successfully !!!",
+    COMMENT_LIST: "Comment List fetched Successfully !!!",
+    COMMENT_DELETED: "Comment Deleted Successfullt !!!",
+    COMMENT_NOT_FOUND: "Comment not found",
     
 }
 
