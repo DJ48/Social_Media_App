@@ -20,7 +20,7 @@ async function verifyToken(req, res, next) {
 
         // varify blacklisted access token.
         const data = await redisClient.get('BL_' + req.body.userId.toString());
-        if (data) {
+        if (data === token) {
             return res.status(401).json({
                 message: responseMessage.BLACKLISTED_TOKEN
             });
