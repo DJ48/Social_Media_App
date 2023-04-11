@@ -11,7 +11,7 @@ import { request } from "express";
 const createTask = async (req, res) => {
     try {
         const request = {
-            userId: req.body.userId,
+            userId: req.sessionData.id,
             title : req.body.title,
         }   
 
@@ -59,7 +59,7 @@ const createTask = async (req, res) => {
 const updateTask = async (req, res) => {
     try {
         const request = {
-            userId: req.body.userId,
+            userId: req.sessionData.id,
             taskId: req.body.taskId,
             title: req.body.title,
             completed: req.body.completed,
@@ -113,7 +113,7 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         const request = {
-            userId: req.body.userId,
+            userId: req.sessionData.id,
             taskId: req.query.id,
         }   
 
@@ -160,7 +160,7 @@ const deleteTask = async (req, res) => {
 const fetchTaskList = async (req, res) => {
     try {
         
-        const userId = req.body.userId;
+        const userId = req.sessionData.id;
 
         //Check if todo exists
         const todoList = await Task.find({ userId: userId }, {'_id': false, '__v': false}); 

@@ -14,12 +14,13 @@ async function verifyToken(req, res, next) {
             })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
-        req.body.userId = decoded.id;
-        req.body.userRole = decoded.role;
+        const payload = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+
+        req.accessToken = token;
+        req.sessionData = payload;
 
         // varify blacklisted access token.
-        const data = await redisClient.get('BL_' + req.body.userId.toString());
+        const data = await redisClient.get('BL_' + req.sessionData.id.toString());
         if (data === token) {
             return res.status(401).json({
                 message: responseMessage.BLACKLISTED_TOKEN
@@ -45,13 +46,13 @@ async function verifyRefreshToken(req, res, next) {
             })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+        const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
     
-        req.body.userId = decoded.id;
-        req.body.userRole = decoded.role;
+        req.accessToken = token;
+        req.sessionData = payload;
 
         // verify if token is stored or not
-        const data = await redisClient.get(req.body.userId.toString());
+        const data = await redisClient.get(req.sessionData.id.toString());
     
         if (!data) {
             return res.status(401).json({

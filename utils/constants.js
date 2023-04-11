@@ -10,6 +10,8 @@ const responseMessage = {
     ERR_MSG_ISSUE_IN_POST_LIST_API: "Oops! Something went wrong in Post List API",
     ERR_MSG_ISSUE_IN_CREATE_COMMENT_API: "Oops! Something went wrong in Create Comment API",
     ERR_MSG_ISSUE_IN_COMMENT_LIST_API: "Oops! Something went wrong in Comment List API",
+    ERR_MSG_ISSUE_IN_USER_LIST_API: "Oops! Something went wrong in User List API",
+    ERR_MSG_ISSUE_IN_USER_DETAILS_API: "Oops! Something went wrong in User Details API",
     
 
 
@@ -49,6 +51,10 @@ const responseMessage = {
     COMMENT_LIST: "Comment List fetched Successfully !!!",
     COMMENT_DELETED: "Comment Deleted Successfullt !!!",
     COMMENT_NOT_FOUND: "Comment not found",
+
+    //USER Controller
+    USER_LIST: "User List fetched Successfully !!!",
+    USER_DETAILS: "User details fetched Successfully !!!",
     
 }
 

@@ -158,8 +158,9 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        const userId = req.body.userId;
-        const token = req.body.token;
+        const userId = req.sessionData.id;
+
+        const token = req.accessToken;
 
         // remove the refresh token
         await redisClient.del(userId.toString());
@@ -186,8 +187,8 @@ const logout = async (req, res) => {
 
 const generateAccessToken = async (req, res) => {
     try {
-        const userId = req.body.userId;
-        const userRole = req.body.role;
+        const userId = req.sessionData.id;
+        const userRole = req.sessionData.role;
 
         //Generate Access Token
         const accessToken = jwt.sign({ id: userId, role: userRole }, process.env.JWT_ACCESS_SECRET, { expiresIn: process.env.JWT_ACCESS_TIME });

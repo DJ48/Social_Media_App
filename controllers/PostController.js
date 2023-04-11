@@ -10,7 +10,7 @@ import responseMessage from "../utils/constants.js";
 const createPost= async (req, res) => {
     try {
         const request = {
-            userId: req.body.userId,
+            userId: req.sessionData.id,
             title: req.body.title,
             description: req.body.description
         }   
@@ -60,7 +60,7 @@ const createPost= async (req, res) => {
 const fetchPostList = async (req, res) => {
     try {
         
-        const userId = req.body.userId;
+        const userId = req.sessionData.id;
 
         //Fetch all post of user
         const postList = await Post.find({ userId: userId }, {'_id': false, '__v': false}); 

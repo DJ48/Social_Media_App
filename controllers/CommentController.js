@@ -14,7 +14,7 @@ const createComment= async (req, res) => {
         const request = {
             text: req.body.text,
             postId: req.body.postId,
-            commentedUserId: req.body.userId,
+            commentedUserId: req.sessionData.id,
         }   
 
         const schema = Joi.object({
