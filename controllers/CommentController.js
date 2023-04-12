@@ -30,6 +30,14 @@ const createComment= async (req, res) => {
             })
         }
 
+        //Check if user exists or not
+        const postExists = await Post.findOne({ postId: request.postId, deletedAt: null });
+        if (_.isEmpty(postExists)) {
+            return res.status(400).send({
+                message: responseMessage.POST_NOT_FOUND
+            })
+        }
+
         const lastCommentId = await Comment.find({}, 'commentId').sort({ commentId: -1 }).limit(1);
 
         if (!_.isEmpty(lastCommentId)) {

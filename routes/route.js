@@ -8,6 +8,7 @@ import { verifyToken, verifyRefreshToken } from "../middlewares/auth.middleware.
 import { createTask, updateTask, deleteTask, fetchTaskList } from "../controllers/TodoController.js";
 import { createPost, fetchPostList } from "../controllers/PostController.js";
 import { createComment, fetchCommentList } from "../controllers/CommentController.js";
+import { fetchUserDetails, fetchUsersList } from "../controllers/UserController.js";
 
 const router = express.Router();
 
@@ -30,5 +31,9 @@ router.get("/post/list", verifyToken, fetchPostList);
 //Comment Controller Routes
 router.post("/create/comment", verifyToken, createComment);
 router.get("/comment/list", verifyToken, fetchCommentList);
+
+//User Controller Routes
+router.post("/user/list", fetchUsersList);
+router.get("/user/details", fetchUserDetails);
 
 export default router;
